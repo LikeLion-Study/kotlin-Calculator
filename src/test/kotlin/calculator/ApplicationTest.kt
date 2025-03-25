@@ -33,4 +33,9 @@ class CalculatorTest {
     }
 
     // TODO: 테스트 코드 추가 가능합니다.
+    @Test
+    fun `자릿수가 다른 수식 계산`() {
+        val result = calculator.calculate("20+2000+5")
+        assertThat(result).isEqualTo(2025)
+    }
 }
