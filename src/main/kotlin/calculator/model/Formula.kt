@@ -13,7 +13,7 @@ class Formula(
         val numbers = number.findAll(formulaString).map { it.value.toInt() }.toList()
         val operators = formulaString.split(number).filter { it.trim().isNotEmpty() }
         if (numbers.isEmpty() && operators.isEmpty()) return emptyList<Int>() to emptyList()
-        require(numbers.size > operators.size) { INVALID_OPERATOR_INPUT_ERROR + "dd" }
+        require(numbers.size > operators.size) { INVALID_OPERATOR_INPUT_ERROR }
         return numbers to operators
     }
 

@@ -33,4 +33,14 @@ class CalculatorTest {
 
         assertThat(result).isEqualTo(10)
     }
+
+    @Test
+    fun `곱셈과 나눗셈 포함 수식 계산`() {
+        val numbers = listOf(4, 5, 2)
+        val operators = listOf("*", "/")
+
+        val result = calculation.sequence(numbers, operators)
+
+        assertThat(result).isEqualTo(10)
+    }
 }
