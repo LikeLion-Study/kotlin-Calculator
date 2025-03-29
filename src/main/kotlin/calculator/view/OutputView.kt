@@ -6,7 +6,7 @@ class OutputView {
     }
 
     fun printOperationResults(result: Int) {
-        println(RESULT_FORMAT)
+        println(RESULT_FORMAT.format(result))
     }
 
     fun printErrorMessage(message: String?) {
