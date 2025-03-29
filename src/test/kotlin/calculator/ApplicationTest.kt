@@ -11,7 +11,7 @@ class CalculatorTest {
     fun `빈 문자열 입력 시 0을 반환한다`() {
         val result = calculation.sequence(emptyList(), emptyList())
 
-        assertThat(result).isEqualTo(0)
+        assertThat(result).isEqualTo(Calculation.INITIAL_EMPTY_VALUE)
     }
 
     @Test
