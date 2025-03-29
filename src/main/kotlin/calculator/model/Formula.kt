@@ -19,7 +19,7 @@ class Formula(
 
     companion object {
         private val number = Regex("\\d+")
-        private val wrongString = Regex("[^\\d\\-*/]") // 숫자와 연산자가 아닌 글자
+        private val wrongString = Regex("[^\\d\\s+\\-*/]") // 숫자와 연산자가 아닌 글자
         private val wrongOperator = Regex("[+\\-*/]{2,}")
         private const val DIVIDE_BY_ZERO = "/0"
 
