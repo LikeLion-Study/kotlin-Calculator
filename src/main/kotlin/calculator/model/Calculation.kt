@@ -34,7 +34,7 @@ class Calculation {
 
     private fun firstOperation(numbers: MutableList<Double>, operators: MutableList<String>) {
         var index = INITIAL_INDEX
-        while (index++ < operators.size) {
+        while (index < operators.size) {
             val result = when (operators[index]) {
                 MULTIPLICATION -> numbers.removeAt(index) * numbers.removeAt(index)
                 DIVISION -> numbers.removeAt(index) / numbers.removeAt(index)
@@ -42,6 +42,7 @@ class Calculation {
             }
             numbers.add(index, result)
             operators.removeAt(index)
+            index++
         }
     }
 
