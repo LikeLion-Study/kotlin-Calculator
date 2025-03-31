@@ -13,10 +13,11 @@ class Calculator(
 ) {
     fun execute() {
         val (numbers, operators) = getFormula()
-        calculate(numbers, operators)
+        sequenceCalculation(numbers, operators)
+        priorityCalculation(numbers ,operators)
     }
 
-    private fun getFormula(): Pair<List<Int>, List<String>> {
+    private fun getFormula(): Pair<List<Double>, List<String>> {
         return retryInput(
             runBlock = {
                 outputView.printCalculateMessage()
@@ -29,8 +30,13 @@ class Calculator(
         )
     }
 
-    private fun calculate(numbers: List<Int>, operators: List<String>) {
+    private fun sequenceCalculation(numbers: List<Double>, operators: List<String>) {
         val result = calculation.sequence(numbers, operators)
+        outputView.printOperationResults(result)
+    }
+
+    private fun priorityCalculation(numbers: List<Double>, operators: List<String>) {
+        val result = calculation.priority(numbers, operators)
         outputView.printOperationResults(result)
     }
 }
