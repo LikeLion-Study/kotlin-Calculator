@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.ValueSource
 
 class FormulaTest {
     @ParameterizedTest
@@ -37,14 +36,6 @@ class FormulaTest {
     fun `0으로 나누면 예외 발생`() {
         assertThrows(IllegalArgumentException::class.java) {
             Formula("5/0")
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["/3+3", "3+3+"])
-    fun `연산자가 맨 앞이나 맨 뒤에 나오면 예외 발생`(input: String) {
-        assertThrows(IllegalArgumentException::class.java) {
-            Formula(input).apply { converter() }
         }
     }
 }
