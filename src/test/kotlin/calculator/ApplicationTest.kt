@@ -1,36 +1,42 @@
 package calculator
 
+import calculator.model.Calculation
+import calculator.utils.Const
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.PrintStream
+import java.nio.charset.StandardCharsets
 
 class CalculatorTest {
-    private val calculator = Calculator()
+    private val originalIn = System.`in`
+    private val originalOut = System.out
+    private lateinit var outputStream: ByteArrayOutputStream
 
-    @Test
-    fun `빈 문자열 입력 시 0을 반환한다`() {
-        val result = calculator.calculate("")
-        assertThat(result).isEqualTo(0)
+    @BeforeEach
+    fun setUp() {
+        outputStream = ByteArrayOutputStream()
+        System.setOut(PrintStream(outputStream, true, StandardCharsets.UTF_8.name()))
+    }
+
+    @AfterEach
+    fun tearDown() {
+        System.setIn(originalIn)
+        System.setOut(originalOut)
     }
 
     @Test
-    fun `덧셈과 뺄셈만 포함된 수식 계산`() {
-        val result = calculator.calculate("1+2-3")
-        assertThat(result).isEqualTo(0)
-    }
+    fun `계산기 정상 실행 테스트`() {
+        val input = "1+2*3+4*5"
+        System.setIn(ByteArrayInputStream(input.toByteArray(StandardCharsets.UTF_8)))
 
-    @Test
-    fun `곱셈과 덧셈 포함 수식 계산`() {
-        val result = calculator.calculate("2*3+4")
-        assertThat(result).isEqualTo(10)
-    }
+        main()
 
-    @Test
-    fun `잘못된 수식 입력 시 예외 발생`() {
-        assertThrows(IllegalArgumentException::class.java) {
-            calculator.calculate("1++2")
-        }
+        val output = outputStream.toString(StandardCharsets.UTF_8.name())
+        assertThat(output).contains("수식을 입력해 주세요.")
+        assertThat(output).contains("결과: 65")
     }
-
-    // TODO: 테스트 코드 추가 가능합니다.
 }

@@ -1,9 +1,14 @@
 package calculator
 
-fun main() {
-    // TODO: 코드 작성
+import calculator.controller.Calculator
+import calculator.model.Calculation
+import calculator.view.InputView
+import calculator.view.OutputView
 
-    // 예시 코드
-    val calculator = Calculator()
-    calculator.calculate("")
+fun main() {
+    val inputView = InputView()
+    val outputView = OutputView()
+    val calculation = Calculation()
+    val calculator = Calculator(inputView, outputView, calculation)
+    calculator.execute()
 }
